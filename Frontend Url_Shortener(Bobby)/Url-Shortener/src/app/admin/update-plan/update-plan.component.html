@@ -1,0 +1,49 @@
+<app-nav></app-nav>
+<div class="main">
+    <div class="form-container">
+        <h1 class="form-title">Update Plan</h1>
+
+        <form [formGroup]="updatePlanForm" (ngSubmit)="onUpdate()">
+            <div class="form-group">
+                <label for="id" class="form-label">Plan ID :</label>
+                <input type="text" id="id" name="id" class="form-input" required formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="planname" class="form-label">Plan Name :</label>
+                <input type="text" id="planname" name="planname" class="form-input" required formControlName="planname">
+            </div>
+
+            <div class="form-group">
+                <label for="urllimit" class="form-label">Url Limit :</label>
+                <input type="text" id="urllimit" name="urllimit" class="form-input" required formControlName="urllimit">
+            </div>
+
+            <div class="form-group">
+                <label for="clicksperurl" class="form-label">Clicks Per Url : </label>
+                <input type="clicksperurl" id="clicksperurl" name="clicksperurl" class="form-input" required
+                    formControlName="clicksperurl">
+            </div>
+
+            <div class="form-group">
+                <label for="customerlimit" class="form-label">Customer Limit :</label>
+                <input type="customerlimit" id="customerlimit" name="customerlimit" class="form-input" required
+                    formControlName="customerlimit">
+            </div>
+
+            <div class="form-group">
+                <label for="price" class="form-label">Price :</label>
+                <input type="price" id="price" name="price" class="form-input" required formControlName="price">
+            </div>
+
+             <div class="form-group">
+                <label for="type" class="form-label">Type :</label>
+                <input type="text" id="type" name="type" class="form-input" required formControlName="type">
+            </div>
+
+            <button type="submit" class="register-btn">Update</button>
+        </form>
+    </div>
+
+</div>
+<app-footer></app-footer>

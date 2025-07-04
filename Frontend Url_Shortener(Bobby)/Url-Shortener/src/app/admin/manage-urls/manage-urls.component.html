@@ -1,0 +1,103 @@
+<app-nav></app-nav>
+<div class="main">
+  <main class="container">
+    <h2 class="section-title">All URLs</h2>
+
+    <div class="filters">
+      <input type="text" placeholder="Filter by Username" [(ngModel)]="filterCriteria.username" name="username">
+      <input type="text" placeholder="Filter by Short URL" [(ngModel)]="filterCriteria.shortUrl" name="shortUrl">
+      <input type="text" placeholder="Filter by Actual URL" [(ngModel)]="filterCriteria.actualUrl" name="actualUrl">
+      <select [(ngModel)]="filterCriteria.clicksLeft" name="clicksLeft">
+        <option value="">Select Clicks Left</option>
+        <option value="0-5">0-5</option>
+        <option value="6-10">6-10</option>
+        <option value="10+">10+</option>
+      </select>
+      <select [(ngModel)]="filterCriteria.totalClicks" name="totalClicks">
+        <option value="">Select Total Clicks</option>
+        <option value="0-5">0-5</option>
+        <option value="6-10">6-10</option>
+        <option value="10+">10+</option>
+      </select>
+      <label>
+        <input type="checkbox" [(ngModel)]="filterCriteria.isCustom" name="isCustom"> Is Custom
+      </label>
+    </div>
+
+    <div class="filter-buttons">
+      <button class="apply-btn" (click)="applyFilters()" [disabled]="isLoadingAllData">
+        <span *ngIf="isLoadingAllData">Loading...</span>
+        <span *ngIf="!isLoadingAllData">Apply Filters</span>
+      </button>
+      <button class="remove-btn" (click)="removeFilters()" [disabled]="!hasActiveFilters()">Remove Filters</button>
+    </div>
+
+    <button class="download-btn" (click)="downloadCSV()" [disabled]="isLoadingAllData">
+      <span *ngIf="isLoadingAllData">Loading...</span>
+      <span *ngIf="!isLoadingAllData">Download CSV</span>
+    </button>
+
+    <!-- Filter Status -->
+    <div class="filter-status" *ngIf="isFiltered">
+      <p>Showing filtered results: {{ totalRecords }} of {{ allUrls.length }} total URLs</p>
+    </div>
+
+    <!-- Loading Status -->
+    <div class="loading-status" *ngIf="isLoadingAllData">
+      <p>Loading all data for filtering/export... Please wait.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Username</th>
+          <th>Short URL</th>
+          <th>Actual URL</th>
+          <th>Is Custom</th>
+          <th>Clicks Left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let url of urlArray; let i = index">
+          <td>{{ getSerialNumber(i) }}</td>
+          <td>{{ url.name }}</td>
+          <td>{{ url.shortCode }}</td>
+          <td class="url-cell">{{ url.originalUrl }}</td>
+          <td>{{ url.customUrl ? 'Yes' : 'No' }}</td>
+          <td>{{ url.totalclicks }}</td>
+        </tr>
+        <tr *ngIf="urlArray.length === 0">
+          <td colspan="6" class="no-data">No URLs found</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <ul class="pagination" *ngIf="totalPages > 1">
+      <li class="page-item" [class.disabled]="pagenumber == 1">
+        <button class="page-link" (click)="onPageChange(pagenumber - 1)" [disabled]="pagenumber == 1">
+          Previous
+        </button>
+      </li>
+
+      <li class="page-item" *ngFor="let page of getPageNumbers()" [class.active]="page === pagenumber">
+        <button class="page-link" (click)="onPageChange(page)">
+          {{ page }}
+        </button>
+      </li>
+
+      <li class="page-item" [class.disabled]="pagenumber == totalPages">
+        <button class="page-link" (click)="onPageChange(pagenumber + 1)" [disabled]="pagenumber == totalPages">
+          Next
+        </button>
+      </li>
+    </ul>
+
+    <!-- Pagination Info -->
+    <div class="pagination-info" *ngIf="totalRecords > 0">
+      Page {{ pagenumber }} of {{ totalPages }} ({{ totalRecords }} total {{ isFiltered ? 'filtered' : '' }} URLs)
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,46 @@
+<app-nav></app-nav>
+<div class="main">
+    <div class="container">
+        <h1 class="my-plans-title">My Plans</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active">URL Plans</button>
+        </div>
+
+        <!-- Search and Download Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <label class="search-label">Plan Name:</label>
+                <input type="text" class="search-input" placeholder="Filter by Plan Name">
+            </div>
+            <button class="download-btn">Download CSV</button>
+        </div>
+
+        <!-- Table -->
+        <table class="plans-table">
+            <thead>
+                <tr>
+                    <th>Sr. No</th>
+                    <th>Plan Name</th>
+                    <th>Url Limit</th>
+                    <th>Clicks Per Url</th>
+                    <th>Custom Url Limit</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let plan of planArray; let i = index">
+                    <td>{{ i + 1}}</td>
+                    <td>{{plan.planname}}</td>
+                    <td>{{plan.urllimit}}</td>
+                    <td>{{plan.clicksperurl}}</td>
+                    <td>{{plan.customurllimit}}</td>
+                    <!-- <td>{{}}</td>
+                    <td>{{}}</td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-footer></app-footer>

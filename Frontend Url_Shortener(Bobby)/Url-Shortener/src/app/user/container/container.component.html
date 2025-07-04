@@ -1,0 +1,38 @@
+<div class="main">
+    <div class="cards-container">
+        <div class="cards-grid">
+            <div class="card">
+                <!-- <h3 class="card-title"><a [routerLink]="['/BlackListUser']">Blacklist User</a></h3> -->
+                <!-- <a routerLink='./BlackListUser'>BlackListUser</a> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/user/GenerateUrl']">Generate Short URL</a>
+                </h3>
+            </div>
+            <div class="card">
+                <h3 class="card-title">
+                    <a [routerLink]="['/user/UserPlan']">My Plans</a>
+                </h3>
+            </div>
+            <div class="card">
+                <h3 class="card-title">
+                    <a [routerLink]="['/user/UserUrls']">My URLs</a>
+                </h3>
+            </div>
+            <div class="card">
+                <!-- <h3 class="card-title">Transactions</h3> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/user/UserQuery']">Query</a>
+                </h3>
+            </div>
+
+             <div class="card">
+                <!-- <h3 class="card-title">Transactions</h3> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/user/Redirect']">Redirect to Url</a>
+                </h3>
+            </div>
+           
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

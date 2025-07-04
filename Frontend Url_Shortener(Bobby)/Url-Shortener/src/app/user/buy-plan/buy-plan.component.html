@@ -1,0 +1,70 @@
+<app-nav></app-nav>
+<!-- buy-plan.component.html -->
+<div class="main">
+    <div class="container">
+        <h1 class="title">Buy URL Plans</h1>
+        
+        <!-- <div class="tab-container">
+            <button class="tab active">URL Plans</button>
+            <button class="tab">Clicks Plans</button>
+        </div> -->
+        
+        <div class="plans-container">
+            <div class="plan-card" *ngFor="let plan of plans">
+                <h2 class="plan-title">{{ plan.planname}}</h2>
+                <p class="plan-description">This is the best plan for frequent users.</p>
+                
+                <div class="plan-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Type: </span>
+                        <span class="detail-value">{{ plan.type}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">URL Limit:</span>
+                        <span class="detail-value">{{ plan.urllimit}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Clicks Per URL:</span>
+                        <span class="detail-value">{{ plan.clicksperurl}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Custom Url:</span>
+                        <span class="detail-value">{{ plan.customurllimit}}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Amount:</span>
+                        <span class="detail-value">${{ plan.price }}</span>
+                    </div>
+                </div>
+                
+                <button 
+                    class="buy-btn" 
+                    [class.selected]="isPlanSelected(plan)"
+                    (click)="isPlanSelected(plan) ? removePlan(plan.planname) : buyPlan(plan)">
+                    {{ isPlanSelected(plan) ? 'Remove' : 'Buy' }}
+                </button>
+            </div>
+        </div>
+        
+        <!-- Selected Plans Summary -->
+        <div class="selected-plans" *ngIf="selectedPlans.length > 0">
+            <h3>Selected Plans:</h3>
+            <div class="selected-plan" *ngFor="let plan of selectedPlans">
+                <span>{{ plan.planname }} - ${{ plan.price }}</span>
+                <button class="remove-small-btn" (click)="removePlan(plan.planname)">×</button>
+            </div>
+        </div>
+        
+        <div class="total-section">
+            <div class="total-amount">Total Amount: ${{ getTotalAmount().toFixed(2) }}</div>
+            <button 
+                mat-raised-button  
+                class="checkout-btn" 
+                (click)="openDialog()"
+                [disabled]="selectedPlans.length === 0">
+                Proceed to Checkout ({{ selectedPlans.length }} items)
+            </button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

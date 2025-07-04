@@ -1,0 +1,256 @@
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.checkout-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-title {
+    color: #2a9d8f;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.section-title {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.plans-section {
+    margin-bottom: 20px;
+}
+
+.plan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.plan-name {
+    color: #666;
+    font-size: 14px;
+    text-transform: lowercase;
+}
+
+.plan-price {
+    color: #2a9d8f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.total-section {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+    margin-bottom: 24px;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-label {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.total-price {
+    color: #f4a261;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.buttons-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.buy-button {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.buy-button:hover {
+    background-color: #238a7a;
+}
+
+.close-button {
+    background: transparent;
+    color: #999;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover {
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .checkout-modal {
+        width: 90%;
+        margin: 20px;
+    }
+}
+
+/* Additional styles for buy-plan.component.css */
+
+.buy-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+  background-color: #0056b3;
+}
+
+.buy-btn.selected {
+  background-color: #dc3545;
+}
+
+.buy-btn.selected:hover {
+  background-color: #c82333;
+}
+
+.selected-plans {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #dee2e6;
+}
+
+.selected-plans h3 {
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.selected-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.selected-plan:last-child {
+  border-bottom: none;
+}
+
+.remove-small-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-small-btn:hover {
+  background-color: #c82333;
+}
+
+.checkout-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Additional styles for checkout-dialog-component.component.css */
+
+.plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.plan-item:last-child {
+  border-bottom: none;
+}
+
+.plan-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.plan-details-small {
+  margin-top: 4px;
+}
+
+.plan-details-small small {
+  color: #666;
+  font-size: 12px;
+}
+
+.plan-price {
+  font-weight: 600;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.no-plans {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.buy-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.buy-button:disabled:hover {
+  background-color: #6c757d;
+}
