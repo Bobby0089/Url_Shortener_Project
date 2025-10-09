@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BuyPlanService {
 
-  private buyurl = 'http://localhost:8080/urlapp/buyplan/buy'
+  private buyurl = ' https://url-shortener-backend.osc-fr1.scalingo.io/urlapp/buyplan/buy'
 
   constructor(private http: HttpClient) { }
 
