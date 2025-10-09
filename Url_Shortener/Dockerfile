@@ -23,3 +23,4 @@ EXPOSE 8080
 
 # Run the Spring Boot app
 CMD ["java", "-jar", "target/Url_Shortener-0.0.1-SNAPSHOT.jar"]
+
