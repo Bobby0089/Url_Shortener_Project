@@ -3,7 +3,7 @@
 # Navigate to server directory
 cd server
 
-# Install dependencies
+# Install server dependencies
 echo "Installing server dependencies..."
 npm install
 
