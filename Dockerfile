@@ -1,40 +1,47 @@
-# ===============================
-# Build stage
-# ===============================
+# --------------------
+# Build Stage
+# --------------------
 FROM eclipse-temurin:17-jdk-alpine AS build
 
-# Install Maven, bash, git
-RUN apk add --no-cache maven bash git
+# Install required tools
+RUN apk add --no-cache bash git maven
 
 # Set working directory
 WORKDIR /app
 
-# Copy the whole project into the container
-COPY . .
+# Copy Maven wrapper and pom.xml first (for caching dependencies)
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn .mvn
+COPY pom.xml .
 
-# Build the Spring Boot application
-RUN mvn clean package -DskipTests
+# Download dependencies (use Maven Wrapper to ensure version consistency)
+RUN ./mvnw dependency:go-offline -B
 
-# ===============================
-# Runtime stage
-# ===============================
+# Copy source code
+COPY src src
+
+# Build Spring Boot app
+RUN ./mvnw clean package -DskipTests
+
+# --------------------
+# Runtime Stage
+# --------------------
 FROM eclipse-temurin:17-jre-alpine
 
-# Set working directory
+# Working directory
 WORKDIR /app
 
-# Copy the built JAR from the build stage
+# Copy built JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the application port
+# Expose the app port
 EXPOSE 8080
 
-# Java memory options for container
+# Add environment variables for JWT configuration
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
-
-# JWT secret and expiration as environment variables
 ENV JWT_SECRET="+GO8M3M0FaKU4zpUl9KrOXx+jMgCvB2C6NdHxOZR8JU="
 ENV JWT_EXPIRATION_MS="2592000000"
 
-# Run the Spring Boot application
+# Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dapp.jwt-secret=$JWT_SECRET -Dapp.jwt-expiration-milliseconds=$JWT_EXPIRATION_MS -jar app.jar"]
