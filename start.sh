@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# Navigate to server
-cd server
+# Build using Maven directly (no cd)
+mvn -f server/pom.xml clean package -DskipTests
 
-# Make mvnw executable
-chmod +x mvnw
-
-# Build and run
-./mvnw clean package -DskipTests
-java -jar target/*.jar
+# Run the Spring Boot app
+java -jar server/target/*.jar
