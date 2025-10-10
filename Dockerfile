@@ -23,7 +23,7 @@ FROM eclipse-temurin:17-jre-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy the built JAR from the build stage
+# Copy the built JAR from build stage
 COPY --from=build /app/server/target/*.jar app.jar
 
 # Expose the application port
@@ -33,4 +33,5 @@ EXPOSE 8080
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 # Run the Spring Boot application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+# Use exec form to avoid shell issues
+ENTRYPOINT ["java", "-jar", "app.jar"]
