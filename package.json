@@ -1,0 +1,11 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "URL Shortener Application",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "./start.sh"
+  }
+}
