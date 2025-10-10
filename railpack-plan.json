@@ -1,0 +1,22 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Spring Boot URL Shortener",
+  "steps": {
+    "install": [
+      "echo 'Making Maven Wrapper executable...'",
+      "chmod +x server/mvnw"
+    ],
+    "build": [
+      "echo 'Building Spring Boot backend using Maven Wrapper...'",
+      "cd server",
+      "./mvnw clean package -DskipTests",
+      "cd .."
+    ],
+    "deploy": [
+      "echo 'Starting Spring Boot application...'",
+      "cd server",
+      "java -jar target/*.jar"
+    ]
+  }
+}
