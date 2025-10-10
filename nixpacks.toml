@@ -4,14 +4,9 @@ NIXPACKS_JDK_VERSION = "17"
 [phases.setup]
 nixPkgs = ["jdk17", "maven"]
 
-[phases.install]
-cmds = ["cd server"]
-
 [phases.build]
 cmds = [
-  "cd server",
-  "chmod +x mvnw",
-  "./mvnw clean package -DskipTests"
+  "cd server && chmod +x mvnw && ./mvnw clean package -DskipTests"
 ]
 
 [start]
