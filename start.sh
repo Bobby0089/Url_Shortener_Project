@@ -1,33 +1,54 @@
-#!/bin/bash
-set -e  # Stop script immediately if any command fails
-
-echo "🚀 Starting build and deploy process..."
-
 # ==================================================
-# ✅ Install Java and Maven (Debian/Ubuntu-based image)
+# ✅ SPRING BOOT PRODUCTION CONFIGURATION
 # ==================================================
-echo "📦 Installing OpenJDK 17 and Maven..."
-apt-get update -y
-apt-get install -y openjdk-17-jdk maven
+
+spring.application.name=Url_Shortener
 
 # ==================================================
-# ✅ Navigate to your Spring Boot project folder
+# ✅ SERVER CONFIGURATION
 # ==================================================
-cd Url_Shortener
+server.port=8080
+server.servlet.context-path=/urlapp
 
 # ==================================================
-# ✅ Ensure mvnw has execute permission
+# ✅ DATABASE CONFIGURATION (Railway)
 # ==================================================
-chmod +x mvnw
+spring.datasource.url=jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+spring.datasource.username=${MYSQLUSER}
+spring.datasource.password=${MYSQLPASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Automatically create and update database tables
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
 # ==================================================
-# ✅ Build Spring Boot JAR (skip tests for speed)
+# ✅ JWT CONFIGURATION
 # ==================================================
-echo "🏗️ Building the Spring Boot application..."
-./mvnw clean package -DskipTests
+app.jwt-secret=${JWT_SECRET:+GO8M3M0FaKU4zpUl9KrOXx+jMgCvB2C6NdHxOZR8JU=}
+app.jwt-expiration-milliseconds=2592000000
 
 # ==================================================
-# ✅ Activate production profile and run the app
+# ✅ LOGGING CONFIGURATION (Reduced for production)
 # ==================================================
-#echo "🔥 Starting the Spring Boot app in production mode..."
-#java -jar -Dspring.profiles.active=prod target/*.jar
+logging.level.root=INFO
+logging.level.org.springframework.web=INFO
+logging.level.org.hibernate.SQL=ERROR
+logging.level.org.hibernate.type.descriptor.sql=ERROR
+logging.level.com.urlshortener=INFO
+
+# Disable file logging to avoid disk I/O overhead
+logging.file.name=
+
+# ==================================================
+# ✅ ERROR & SECURITY CONFIGURATION
+# ==================================================
+server.error.include-stacktrace=never
+server.error.whitelabel.enabled=false
+
+# ==================================================
+# ✅ PERFORMANCE CONFIGURATION
+# ==================================================
+server.compression.enabled=true
+server.compression.mime-types=application/json,application/xml,text/html,text/xml,text/plain
