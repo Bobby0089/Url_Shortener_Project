@@ -1,80 +1,76 @@
-package com.aurionpro.controller;
-
-import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.aurionpro.service.auth;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.aurionpro.dto.auth.JwtAuthResponse;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import com.aurionpro.dto.auth.UserLoginDto;
 import com.aurionpro.dto.auth.UserRegisterDto;
+import com.aurionpro.entity.Role;
 import com.aurionpro.entity.User;
-import com.aurionpro.service.auth.AuthService;
-
-@RestController
-@RequestMapping("/urlapp/auth")
-public class AuthController {
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
-    
+import com.aurionpro.exception.ApiException;
+import com.aurionpro.exception.UserApiException;
+import com.aurionpro.repository.RoleRepository;
+import com.aurionpro.repository.UserRepository;
+import com.aurionpro.security.JwtTokenProvider;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+@Service
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService{
     @Autowired
-    private AuthService authService;
-    
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegisterDto dto) {
-        try {
-            logger.info("📥 Received registration request for username: {}", dto.getUsername());
-            
-            User registeredUser = authService.register(dto);
-            
-            logger.info("✅ User registered successfully: {}", registeredUser.getUsername());
-            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
-            
-        } catch (Exception e) {
-            logger.error("❌ Registration failed: {}", e.getMessage(), e);
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse(e.getMessage()));
-        }
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Override
+    public User register(UserRegisterDto registration) {
+        if(userRepository.existsByUsername(registration.getUsername()))
+            throw new UserApiException(HttpStatus.BAD_REQUEST, "User already exists");
+        User user = new User();
+        user.setUsername(registration.getUsername());
+        user.setPassword(passwordEncoder.encode(registration.getPassword()));
+
+        List<Role> roles = new ArrayList<Role>();
+
+        Role role = roleRepository.findByRolename(registration.getRole())
+                .orElseThrow(() -> new ApiException("Role 'USER' not found in database"));
+        roles.add(role);
+        user.setRoles(roles);
+
+        user.setFirstname(registration.getFirstname());
+        user.setLastname(registration.getLastname());
+        user.setEmail(registration.getEmail());
+
+        return userRepository.save(user);
     }
-    
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UserLoginDto loginDto) {
-        try {
-            logger.info("📥 Received login request for username: {}", loginDto.getUsername());
-            
-            String token = authService.login(loginDto);
-            
-            JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
-            jwtAuthResponse.setAccessToken(token);
-            
-            logger.info("✅ Login successful for user: {}", loginDto.getUsername());
-            return ResponseEntity.ok(jwtAuthResponse);
-            
-        } catch (Exception e) {
-            logger.error("❌ Login failed: {}", e.getMessage());
-            return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(new ErrorResponse(e.getMessage()));
-        }
-    }
-    
-    // Simple error response class
-    private static class ErrorResponse {
-        private String message;
-        
-        public ErrorResponse(String message) {
-            this.message = message;
-        }
-        
-        public String getMessage() {
-            return message;
-        }
-        
-        public void setMessage(String message) {
-            this.message = message;
-        }
+    @Override
+    public String login(UserLoginDto loginDto) {
+
+            try
+            {
+                Authentication authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                String token = jwtTokenProvider.generateToken(authentication);
+                        return token;
+
+            }catch(BadCredentialsException e)
+            {
+                throw new UserApiException(HttpStatus.NOT_FOUND,"User not found");
+            }        
+
     }
 }
