@@ -1,54 +1,23 @@
-# ==================================================
-# ✅ SPRING BOOT PRODUCTION CONFIGURATION
-# ==================================================
+#!/bin/bash
+set -e
 
-spring.application.name=Url_Shortener
+echo "🚀 Starting build and deploy process..."
 
-# ==================================================
-# ✅ SERVER CONFIGURATION
-# ==================================================
-server.port=8080
-server.servlet.context-path=/urlapp
+# Use non-interactive mode to avoid apt warnings
+export DEBIAN_FRONTEND=noninteractive
 
-# ==================================================
-# ✅ DATABASE CONFIGURATION (Railway)
-# ==================================================
-spring.datasource.url=jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
-spring.datasource.username=${MYSQLUSER}
-spring.datasource.password=${MYSQLPASSWORD}
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+echo "📦 Installing OpenJDK 17 and Maven..."
+apt-get update -y
+apt-get install -y --no-install-recommends openjdk-17-jdk maven
 
-# Automatically create and update database tables
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=false
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+echo "📂 Navigating to project directory..."
+cd Url_Shortener
 
-# ==================================================
-# ✅ JWT CONFIGURATION
-# ==================================================
-app.jwt-secret=${JWT_SECRET:+GO8M3M0FaKU4zpUl9KrOXx+jMgCvB2C6NdHxOZR8JU=}
-app.jwt-expiration-milliseconds=2592000000
+echo "⚙️ Giving mvnw execute permissions..."
+chmod +x mvnw || true
 
-# ==================================================
-# ✅ LOGGING CONFIGURATION (Reduced for production)
-# ==================================================
-logging.level.root=INFO
-logging.level.org.springframework.web=INFO
-logging.level.org.hibernate.SQL=ERROR
-logging.level.org.hibernate.type.descriptor.sql=ERROR
-logging.level.com.urlshortener=INFO
+echo "🏗️ Building the Spring Boot application..."
+./mvnw clean package -DskipTests
 
-# Disable file logging to avoid disk I/O overhead
-logging.file.name=
-
-# ==================================================
-# ✅ ERROR & SECURITY CONFIGURATION
-# ==================================================
-server.error.include-stacktrace=never
-server.error.whitelabel.enabled=false
-
-# ==================================================
-# ✅ PERFORMANCE CONFIGURATION
-# ==================================================
-server.compression.enabled=true
-server.compression.mime-types=application/json,application/xml,text/html,text/xml,text/plain
+echo "🔥 Starting the Spring Boot app in production mode..."
+java -jar -Dspring.profiles.active=prod target/*.jar
