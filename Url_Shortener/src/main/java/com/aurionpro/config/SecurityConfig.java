@@ -65,7 +65,7 @@ public class SecurityConfig {
     }
 
     // ✅ Security Filter Chain
-   @Bean
+  @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http.csrf(csrf -> csrf.disable())
@@ -74,9 +74,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .authorizeHttpRequests(request -> request
 
             // ✅ PUBLIC ENDPOINTS - Most specific first!
-            .requestMatchers("/urlapp/auth/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/urlapp/auth/login").permitAll()
-            .requestMatchers(HttpMethod.POST, "/urlapp/user/register").permitAll()  // ✅ Specific path
+            .requestMatchers("/urlapp/auth/**").permitAll()  // Covers /register and /login
             .requestMatchers(HttpMethod.GET, "/urlapp/plan/view").permitAll()
             .requestMatchers(HttpMethod.PUT, "/urlapp/query/adminResponse").permitAll()
             .requestMatchers("/urlapp/query/**").permitAll()
