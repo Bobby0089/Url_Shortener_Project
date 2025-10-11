@@ -65,38 +65,38 @@ public class SecurityConfig {
     }
 
     // ✅ Security Filter Chain
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+   @Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable())
-            .cors(withDefaults())
-            .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-            .authorizeHttpRequests(request -> request
+    http.csrf(csrf -> csrf.disable())
+        .cors(withDefaults())
+        .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+        .authorizeHttpRequests(request -> request
 
-                // ✅ Public Endpoints
-                .requestMatchers("/urlapp/auth/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/urlapp/auth/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/urlapp/user/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/urlapp/plan/view").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/urlapp/query/adminResponse").permitAll()
-                .requestMatchers("/urlapp/query/**").permitAll()
-                .requestMatchers("/urlapp/transaction/**").permitAll()
-                .requestMatchers("/urlapp/buyplan/**").permitAll()
-                .requestMatchers("/urlapp/generateurl/**").permitAll()
+            // ✅ PUBLIC ENDPOINTS - Most specific first!
+            .requestMatchers("/urlapp/auth/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/urlapp/auth/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/urlapp/user/register").permitAll()  // ✅ Specific path
+            .requestMatchers(HttpMethod.GET, "/urlapp/plan/view").permitAll()
+            .requestMatchers(HttpMethod.PUT, "/urlapp/query/adminResponse").permitAll()
+            .requestMatchers("/urlapp/query/**").permitAll()
+            .requestMatchers("/urlapp/transaction/**").permitAll()
+            .requestMatchers("/urlapp/buyplan/**").permitAll()
+            .requestMatchers("/urlapp/generateurl/**").permitAll()
 
-                // ✅ Admin Endpoints
-                .requestMatchers("/urlapp/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/urlapp/plan/**").hasAuthority("ROLE_ADMIN")
+            // ✅ ADMIN ENDPOINTS
+            .requestMatchers("/urlapp/admin/**").hasAuthority("ROLE_ADMIN")
+            .requestMatchers("/urlapp/plan/**").hasAuthority("ROLE_ADMIN")
 
-                // ✅ Customer/User Endpoints
-                .requestMatchers("/urlapp/user/**").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
+            // ✅ CUSTOMER/USER ENDPOINTS - Put AFTER specific public paths
+            .requestMatchers("/urlapp/user/**").hasAnyAuthority("ROLE_CUSTOMER", "ROLE_ADMIN")
 
-                // ✅ All Other Endpoints Require Auth
-                .anyRequest().authenticated()
-            )
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            // ✅ ALL OTHER ENDPOINTS
+            .anyRequest().authenticated()
+        )
+        .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+    return http.build();
+}
 }
