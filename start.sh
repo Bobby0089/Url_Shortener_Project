@@ -29,5 +29,5 @@ echo "🏗️ Building the Spring Boot application..."
 # ==================================================
 # ✅ Activate production profile and run the app
 # ==================================================
-echo "🔥 Starting the Spring Boot app in production mode..."
-java -jar -Dspring.profiles.active=prod target/*.jar
+#echo "🔥 Starting the Spring Boot app in production mode..."
+#java -jar -Dspring.profiles.active=prod target/*.jar
