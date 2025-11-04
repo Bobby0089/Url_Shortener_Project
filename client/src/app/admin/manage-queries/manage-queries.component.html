@@ -1,0 +1,61 @@
+<app-nav></app-nav>
+<div class="main">
+  <div class="container">
+    <h1>Admin Query Responses</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="filter-box">
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="usernameFilter" placeholder="Filter by Username" />
+      </div>
+    </div>
+
+    <button class="action-btn">Download CSV</button>
+
+    <!-- Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Username</th>
+          <th>Query</th>
+          <th>Status</th>
+          <th>Response</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let query of queriesArray; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ query.username }}</td>
+          <td>{{ query.queryText }}</td>
+          <td>{{ query.status }}</td>
+          <td>
+            <textarea class="response-input" #responseRef placeholder="Enter response"></textarea>
+          </td>
+          <td>
+            <button class="submit-btn" (click)="submitResponse(query.id, responseRef.value)">
+              Submit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination (non-functional for now) -->
+    <div class="pagination">
+      <span>Rows per page:</span>
+      <select>
+        <option>4</option>
+        <option>8</option>
+        <option>12</option>
+      </select>
+
+      <button class="page-btn prev">&lt;</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn next">&gt;</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

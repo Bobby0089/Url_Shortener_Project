@@ -1,0 +1,44 @@
+<app-nav>
+
+
+    
+</app-nav>
+<div class="main">
+    <div class="main-content">
+        <h1 class="title">Manage Your Queries</h1>
+        <p class="subtitle">Submit new queries or view your existing queries from here.</p>
+
+        <div class="query-container">
+            <div class="tabs">
+                <button type="button" [routerLink]="['/user/UserQuery']" class="tab-button active">Add Query</button>
+                <button type="button" class="tab-button inactive" [routerLink]="['/user/ViewUserQuery']">My
+                    Queries</button>
+            </div>
+
+            <div class="query-form">
+                <h2 class="form-title">Your Query</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr No.</th>
+                            <th>Username</th>
+                            <th>Query Text</th>
+                            <th>Query Response</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let query of allQuery; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{username}}</td>
+                            <td>{{query.queryText}}</td>
+                            <td>{{query.responseText}}</td>
+                            <td>{{query.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

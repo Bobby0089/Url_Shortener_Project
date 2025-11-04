@@ -1,0 +1,105 @@
+  .main {
+    background: linear-gradient(90deg, #470857 0%, #700ecc 100%);
+        min-height: 100vh;
+        color: white;
+        padding-top: 1px;
+        margin-top: 0;
+     
+      
+      /* display: flex; */
+      /* justify-content: center; */
+      /* align-items: center; */
+  }
+
+  .main-content {
+      max-width: 540px;
+      margin: 40px auto;
+      text-align: center;
+  }
+
+  .form-title {
+      font-size: 28px;
+      margin-bottom: 8px;
+      margin-top: 50px;
+  }
+
+  .form-subtitle {
+      margin-bottom: 25px;
+      font-size: 15px;
+      opacity: 0.9;
+      font-weight: normal;
+  }
+
+  .profile-form {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+
+  }
+
+  input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      flex: 1;
+      font-size: 14px;
+      height: 40px;
+  }
+
+  select {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      flex: 1;
+      font-size: 14px;
+      height: 40px;
+      /* Increased height */
+      appearance: menulist;
+      background-color: white;
+  }
+
+  .add-field-btn {
+      background-color: #2473e8;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin: 15px 0;
+      font-weight: normal;
+      font-size: 14px;
+  }
+
+  .update-btn {
+      background-color: #10a868;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin: 15px 0;
+      font-weight: normal;
+      font-size: 14px;
+  }
+
+  .delete-btn {
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin: 10px 0 0 0;
+      font-weight: normal;
+      font-size: 14px;
+  }

@@ -1,0 +1,42 @@
+<div class="main">
+    <div class="cards-container">
+        <div class="cards-grid">
+            <div class="card">
+                <!-- <h3 class="card-title"><a [routerLink]="['/BlackListUser']">Blacklist User</a></h3> -->
+                <!-- <a routerLink='./BlackListUser'>BlackListUser</a> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/BlackListUser']">Blacklist User</a>
+                </h3>
+            </div>
+            <div class="card">
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/ManagePlans']">Manage Plans</a>
+                </h3>
+            </div>
+            <div class="card">
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/ManageQueries']">Manage Queries</a>
+                </h3>
+            </div>
+            <div class="card">
+                <!-- <h3 class="card-title">Transactions</h3> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/Transactions']">Transactions</a>
+                </h3>
+            </div>
+            <div class="card">
+                <!-- <h3 class="card-title">Manage URLs</h3> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/ManageUrls']">Manage URLs</a>
+                </h3>
+            </div>
+            <div class="card">  
+                <!-- <h3 class="card-title">Manage Users</h3> -->
+                <h3 class="card-title">
+                    <a [routerLink]="['/admin/ManageUsers']">Manage Users</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,70 @@
+<app-nav></app-nav>
+<div class="main">
+     <main class="container">
+    <h2 class="section-title">All URLs</h2>
+
+    <div class="filters">
+      <input type="text" placeholder="Filter by Username">
+      <input type="text" placeholder="Filter by Short URL">
+      <input type="text" placeholder="Filter by Actual URL">
+      <select>
+        <option disabled selected>Select Clicks Left</option>
+        <option>0-5</option>
+        <option>6-10</option>
+        <option>10+</option>
+      </select>
+      <select>
+        <option disabled selected>Select Total Clicks</option>
+        <option>0-5</option>
+        <option>6-10</option>
+        <option>10+</option>
+      </select>
+      <label>
+        <input type="checkbox"> Is Custom
+      </label>
+    </div>
+
+    <div class="filter-buttons">
+      <button class="apply-btn">Apply Filters</button>
+      <button class="remove-btn">Remove Filters</button>
+    </div>
+
+    <button class="download-btn">Download CSV</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Username</th>
+          <th>Short URL</th>
+          <th>Actual URL</th>
+          <th>Is Custom</th>
+          <!-- <th>Total Clicks</th> -->
+          <th>Clicks Left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let url of urlArray">
+          <td>1</td>
+          <td>{{url.name}}</td>
+          <td>{{url.shortCode}}</td>
+          <td>{{url.originalUrl}}</td>
+          <td>{{url.customUrl}}</td>
+          <!-- <td>1</td> -->
+          <td>{{url.totalclicks}}</td>
+        </tr>
+       
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button>&lt;</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>&gt;</button>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

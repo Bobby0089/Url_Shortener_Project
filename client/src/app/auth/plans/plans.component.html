@@ -1,0 +1,37 @@
+<app-nav></app-nav>
+<div class="main" *ngIf="plans.length">
+    <!-- Section title -->
+    <h1 class="section-title">Plans</h1>
+    
+    <!-- Plan card -->
+    <div class="plan-card">
+        <h2 class="plan-title">{{ plans[currentIndex]?.planname || 'No Title' }}</h2>
+        <p class="plan-description">this is the best plan for frequent users.</p>
+        
+        <div class="plan-feature">
+            <span>Type: {{ plans[currentIndex]?.type }}</span>
+        </div>
+        
+        <div class="plan-feature">
+            <span>URL Limit: {{ plans[currentIndex]?.urllimit }}</span>
+        </div>
+        
+        <div class="plan-feature">
+            <span>Custom URL Limit: {{ plans[currentIndex]?.customurllimit }}</span>
+        </div>
+        
+        <div class="plan-feature">
+            <span>Clicks Per URL:  {{ plans[currentIndex]?.clicksperurl }}</span>
+        </div>
+        
+        <div class="plan-feature">
+            <span>Amount: {{ plans[currentIndex]?.price }}</span>
+        </div>
+    </div>
+    
+    <!-- Buttons -->
+    <div class="buttons-container">
+        <button class="btn next-btn" (click)="showNextPlan()" >Next</button>
+    </div>
+</div>
+<app-footer></app-footer>

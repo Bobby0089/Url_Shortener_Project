@@ -1,0 +1,150 @@
+.main {
+    background: linear-gradient(90deg,  #ffffff 0%, #dac6df 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #e6dcee;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+    width: 1500px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #020b0c;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.filter-section {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.filter-box {
+    margin-right: 20px;
+}
+
+.filter-box label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #0a0a0a;
+}
+
+.filter-box input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.action-btn {
+    background-color: #12b8a0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.action-btn:hover {
+    background-color: #e6dcee;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #12b8a0;
+    color: white;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #b3efe5;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.response-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.submit-btn {
+    background-color: #2176af;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color:  #2176af;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination select {
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.pagination span {
+    margin-right: 20px;
+    color: #000000;
+}
+
+.page-btn {
+    background-color:  #2176af;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #2176af;
+}
+
+.page-btn.prev,
+.page-btn.next {
+    background-color: #2176af;
+}

@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build:ssr"
+  publish = "dist/url-shortener/browser"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/angular-runtime"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/builders/render"
+  status = 200

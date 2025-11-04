@@ -1,0 +1,96 @@
+.main {
+    min-height: 100vh;
+    background: linear-gradient(90deg, #ffffff 20%, #dac6df 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Plans section */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #000000;
+}
+
+.plan-card {
+    background-color: #e6d5eb;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 450px;
+    width: 100%;
+    color: #000000;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.plan-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    color: #000000;
+}
+
+.plan-description {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.plan-feature {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-feature:last-child {
+    margin-top: 1.5rem;
+    font-weight: bold;
+}
+
+.btn {
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.next-btn {
+    background-color: #10b981;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.next-btn:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+}
+
+.start-btn {
+    background-color: white;
+    color: #2563eb;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
